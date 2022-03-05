@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import{GridList,GridListTile,GridListTileBar, IconButton, ListSubheader} from '@material-ui/core';
+import InfoIcon from "@material-ui/icons/Info";
+import dataList from './data.json'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GridList cellHeight={200} cols={3} style={{width:1350,height:600}}>
+      <GridListTile
+          key="SubHeader"
+          cols={3}
+          style={{ height: 50, textAlign: "start" }}>
+          <ListSubheader component="div"><b>List of Items</b></ListSubheader>
+        </GridListTile>
+        {dataList.map((data)=>(
+          <GridListTile key ={data.id}  >
+            <img src={data.image}alt={data.title}/>
+            <video src={data.video}alt={data.video}/>
+            <GridListTileBar
+              title={data.title}
+              subtitle={data.description}
+              style={{textAlign: 'start'}}
+              actionIcon={
+                <IconButton>
+                  <InfoIcon style={{color: 'white'}}/>
+                </IconButton>
+              }
+            />
+          </GridListTile>
+        ))}
+
+      </GridList>
     </div>
   );
 }
